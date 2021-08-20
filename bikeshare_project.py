@@ -6,6 +6,7 @@ CITY_DATA = { 'chicago': 'chicago.csv',
               'new york city': 'new_york_city.csv',
               'washington': 'washington.csv' }
 
+
 def get_filters():
     """
     Asks user to specify a city, month, and day to analyze.
@@ -21,7 +22,7 @@ def get_filters():
     cities = ['chicago', 'washington', 'new york']
     while True:
         city = input("Type the name of the city you would like to see data for :\n Chicago, New York, Washington\n").lower()
-        if acity in cities:
+        if city in cities:
             break
         else:
             print("Not a valid response.")
@@ -30,7 +31,7 @@ def get_filters():
     months = ['january', 'february', 'march', 'april', 'may', 'june', 'all']
     while True:
         month = input("What month would you like to learn about? January', February, March, April, May, June, All?\n").lower()
-        if amonth in months:
+        if month in months:
             break
         else:
             print("Incorrect input. Please enter a previously mentioned month to continue.")
@@ -38,18 +39,18 @@ def get_filters():
     # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
     days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'all']
     while True:
-        day = input("Would you like to filter the information by the day of the week?\n").lower()
-        if day == 'yes':
-            day = input("Enter a day of the week you would like to learn about. If you dont have a preference type 'All'. \n All, Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday\n").lower()
+        day_of_week = input("Would you like to filter the information by the day of the week?\n").lower()
+        if day_of_week == 'yes':
+            what_day = input("Enter a day of the week you would like to learn about. If you dont have a preference type 'All'. \n All, Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday\n").lower()
         else:
             break
-        if day == week_days in days:
+        if what_day == days in days:
             break
         else:
             print('Not a valid response. Answer must be case sensitive. To exit program press "Enter"')
 
         print('-'*40)
-    return city, month, day
+    return city, month, days
 
     """
     Loads data for the specified city and filters by month and day if applicable.
@@ -60,6 +61,8 @@ def get_filters():
         Returns:
             df - Pandas DataFrame containing city data filtered by month and day
         """
+
+
 def load_data(city, month, day):
     df = pd.read_csv(CITY_DATA[city])
     df['Start Time'] = pd.to_datetime(df['Start Time'])
@@ -159,6 +162,7 @@ def user_stats(df, city):
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
+
 def raw_data(df):
     while True:
         choice = input('\nWould you like to view raw data? Enter Yes or No\n')
@@ -175,10 +179,11 @@ def raw_data(df):
         if choice == "no":
             break
 
+
 def main():
     while True:
-        city, month, day = get_filters()
-        df = load_data(city, month, day)
+        city, month, days = get_filters()
+        df = load_data(city, month, days)
 
         time_stats(df)
         station_stats(df)
@@ -188,6 +193,7 @@ def main():
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
             break
+
 
 if __name__ == "__main__":
     main()
