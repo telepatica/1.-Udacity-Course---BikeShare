@@ -167,7 +167,7 @@ def raw_data(df):
     while True:
         choice = input('\nWould you like to view raw data? Enter Yes or No\n')
         if choice == "yes":
-            start_loc = 0
+            i = 0
             print(df.iloc[i:i+5])
             i += 5
         if choice == "no":
