@@ -50,7 +50,7 @@ def get_filters():
             print('Not a valid response. Answer must be case sensitive. To exit program press "Enter"')
 
         print('-'*40)
-    return city, month, days
+    return cities, months, days
 
     """
     Loads data for the specified city and filters by month and day if applicable.
@@ -74,7 +74,7 @@ def load_data(city, month, day):
         month = months.index(month) + 1
         df = df[df['month'] == month]
     if day != 'all':
-        df = df[df['day_of_week'] == day.title()]
+        df = df[df['day_of_week'] == day]
     return df
 
 
@@ -182,13 +182,13 @@ def raw_data(df):
 
 def main():
     while True:
-        city, month, days = get_filters()
-        df = load_data(city, month, days)
+        cities, months, days = get_filters()
+        df = load_data(cities, months, days)
 
         time_stats(df)
         station_stats(df)
         trip_duration_stats(df)
-        user_stats(df, city)
+        user_stats(df, cities)
 
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
