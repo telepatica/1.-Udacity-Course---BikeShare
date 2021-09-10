@@ -22,7 +22,7 @@ def get_filters():
     cities = ['chicago', 'washington', 'new york']
     while True:
         city = input("Type the name of the city you would like to see data for :\n Chicago, New York, Washington\n").lower()
-        if city in cities:
+        if city.lower() in cities:
             break
         else:
             print("Not a valid response.")
@@ -31,7 +31,7 @@ def get_filters():
     months = ['january', 'february', 'march', 'april', 'may', 'june', 'all']
     while True:
         month = input("What month would you like to learn about? January', February, March, April, May, June, All?\n").lower()
-        if month in months:
+        if month.lower() in months:
             break
         else:
             print("Incorrect input. Please enter a previously mentioned month to continue.")
@@ -40,14 +40,14 @@ def get_filters():
     days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'all']
     while True:
         day_of_week = input("Would you like to filter the information by the day of the week?\n").lower()
-        if day_of_week == 'yes':
+        if day_of_week.lower() == 'yes':
             what_day = input("Enter a day of the week you would like to learn about. If you dont have a preference type 'All'. \n All, Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday\n").lower()
         else:
             break
-        if what_day == days in days:
+        if what_day == days.lower() in days:
             break
         else:
-            print('Not a valid response. Answer must be case sensitive. To exit program press "Enter"')
+            print('Not a valid response. Try again. To exit program press "Enter"')
 
         print('-'*40)
     return city, month, day_of_week
@@ -166,7 +166,7 @@ def user_stats(df, city):
 def raw_data(df):
     while True:
         choice = input('\nWould you like to view raw data? Enter Yes or No\n')
-        if choice == "yes":
+        if choice.lower() == "yes":
             i = 0
             print(df.iloc[i:i+5])
             i += 5
